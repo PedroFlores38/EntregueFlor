@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+    <html lang="pt-BR">
+        <head>
+            <meta charset="UTF-8">
+            <title>Entregue a flor</title>
+            <style>
+                body {
+                    font-family: 'Comic Sans MS', Cursive;
+                    background-image: url("banco.jpg");
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    color: #fff;
+                    text-align: center;
+                    padding: 40px;
+                }
+            </style>
+        </head>
+        <body>
+            <div id="jogo">
+            <h1>Alguém tá te esperando</h1>
+            <p id="historinha">Você está tremendo muito... e sente o corpo como se estivesse em sua pior febre.</p>
+            <div id="escolhas">
+        </div>
+    </div>
+    <script>
+        const historinha = document.getElementById("historinha");
+        const escolhas = document.getElementById("escolhas");
+
+        function showescolhas(options) {
+        escolhas.innerHTML = "";
+        options.forEach(option => {
+            const btn = document.createElement("button");
+            btn.innerText = option.text
+            btn.onclick = () => {
+                const som = new Audio("Click.mp3");
+                som.play();
+                option.action();
+            };
+            escolhas.appendChild(btn);
+        });
+        }
+        function começar(){
+            historinha.innerText = "Você tem um crush no seu amigo, mas você é mais timida então não se falam tanto quanto você gostaria. Ele está sentado naquele banco debaixo da árvore lendo um livro... O sol de fim de tarde parece ressaltar o quão fofo ele é. Ao seu redor, várias flores na grama."
+            showescolhas([
+                {text: "Entregar uma flor", action: flor},
+                {text: "O admirar mais", action: admirar},
+            ]);
+        }
+        function flor(){
+            historinha.innerText = "Você teve uma ideia. Você olha a sua volta, escolhendo com calma uma flor bonita. Ao escolher uma bem cor de rosa, você caminha até ele. Ele levanta a cabeça do seu livro e te olha nos seus olhos"
+            showescolhas([
+                {text: "Dar oi", action: oi},
+                {text: "Livro", action: livro},
+            ]);
+        }
+        function oi(){
+            historinha.innerText = "Escondendo a delicada flor nas costas, você diz:\n - oi\n - oi! Essa flor é pra mim?\n (droga)"
+            showescolhas([
+                {text: "flor!", action: entregar},
+            ])
+        }
+        function livro(){
+            historinha.innerText = "-Oi... Que livro é esse?\n -oi! é o só um de ficção cientifica, de um homem que precisa enfrentar sua verao metalica que representa o mal dentro de si \n -Parece legal \n -...\n -...\n -Essa flor é pra mim?? "
+            showescolhas([
+                {text: "só entrega", action: entregar},
+            ])
+        }
+        function entregar(){
+            historinha.innerText = "Com nervosismo e certo tremor, você senta se ao seu lado e entrega a flor.\n -É só que achei bonita e pensei em você...\n Um rubor surge em seu rosto e ele te da um beijo na bochecha... seu rosto ferve e você o olha de volta, parecendo que o fim do dia ficou ainda mais bonito"
+            showescolhas([
+                {text: "Fim :]", action: começar},
+            ])
+        }
+        function admirar(){
+            historinha.innerText = "Pela timidez, você opta por continuar sentada na grama olhando pra ele enquanto ele folheia ás páginas. Derrepente ele te olha de volta notando sua presença. Seus olhos se encontram e você sente a vontade de enterrar a cabeça feito um avestruz. Mas ele acena pra você e te manda um beijo com a mão com um sorriso bobo no rosto"
+            showescolhas([
+                {text: "Acenar de volta", action: aceno},
+                {text: "Infarto fuminante", action: infarto},//colocar a opção de reiniciar assim apenas no final
+            ])
+        }
+        function infarto(){
+            historinha.innerText = "Seu rosto ferve em combustão e você desvia o seu rosto olhando para esconder o rubor... talvez outro dia"
+             showescolhas([
+                {text: "Outro caminho", action: começar}
+            ])
+        }
+        function aceno(){
+            historinha.innerText = "Você sente que o seu rosto foi para 40 graus de tão quente, com um sorriso desengonçado você acena de volta, mesmo que tenha sido com o dobro da velocidade por longos segundos, como se você tivesse tomado muito café mais cedo. Ele levanta uma sombrancelha, mas continua sorrindo e volta a ter. Quem sabe um dia?"
+            showescolhas([
+                {text: "Outro caminho", action: começar}
+            ])
+        }
+        começar();
+    </script>
+        </body>
+    </html>
